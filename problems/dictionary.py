@@ -8,10 +8,16 @@ Assumptions:
     4. Assume inputs are valid
 """
 
+class Item:
+    def __init__(self, key, value):
+        self.key = key
+        self.val = value
+
+
 class MyDict:
     def __init__(self, capacity=1000):
         self.capacity = capacity
-        self.values = [[] for _ in range(self.capacity)] # List[List[(key, value)]]
+        self.values = [[] for _ in range(self.capacity)] # List[List[Item]]
         self.size = 0
 
     def get(self, key):
@@ -19,8 +25,8 @@ class MyDict:
         Used for retrieving values from keys
         """
         index = self._hash(key)
-        for (k, val) in self.values[index]:
-            if key == k: return val
+        for item in self.values[index]:
+            if item.key == key: return item.val
         raise Exception("Key Error")
 
     def insert(self, key, value):
@@ -29,10 +35,10 @@ class MyDict:
         Increments size
         """
         index = self._hash(key)
-        for (k, _) in self.values[index]:
-            if k == key:
+        for item in self.values[index]:
+            if item.key == key:
                 raise Exception("Key Value pair already exists")
-        self.values[index].append([key, value])
+        self.values[index].append(Item(key, value))
         self.size += 1
 
     def delete(self, key):
@@ -57,7 +63,7 @@ class MyDict:
 
         if i == -1: raise Exception("Key Error. Cannot update key-value pair that doesnt exist")
 
-        self.values[table_index][i][1] = value
+        self.values[table_index][i].val = value
 
     def get_size(self) -> int:
         """
@@ -79,7 +85,7 @@ class MyDict:
         """
         i = len(self.values[index]) - 1
         while i > 0:
-            if key == self.values[index][i][0]:
+            if key == self.values[index][i].key:
                 break
             i -= 1
         return i
@@ -98,7 +104,8 @@ def test_get():
 def test_insert():
     d = MyDict()
     d.insert(1, "hello1")
-    assert(d.values[1] == [[1, "hello1"]])
+    assert(d.values[1][0].key == 1)
+    assert(d.values[1][0].val == "hello1")
     assert(d.get_size() == 1)
 
 def test_delete():
@@ -112,7 +119,7 @@ def test_update():
     d = MyDict()
     d.insert(1, "hello1")
     d.update(1, "goodbye1")
-    assert(d.values[1][0][1] == "goodbye1")
+    assert(d.values[1][0].val == "goodbye1")
 
 def test_hash():
     assert(1 == MyDict()._hash(1))

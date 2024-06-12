@@ -5,6 +5,7 @@ Assumptions:
     1. keys are integers
     2. can use chaining for collisions
     3. data will fit in memory (do not worry about alloocating extra space to the dict)
+    4. Assume inputs are valid
 """
 
 class MyDict:

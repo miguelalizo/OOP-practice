@@ -94,6 +94,11 @@ class MyDict:
 Unit tests
 """
 
+def test_item():
+    item = Item(1, "foo")
+    assert(item.key == 1)
+    assert(item.val == "foo")
+
 def test_get():
     d = MyDict()
     d.insert(1, "hello1")

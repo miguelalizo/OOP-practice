@@ -1,6 +1,7 @@
 # OOP Design Patterns
 
 ## Creational Patterns
+----------------------
 
 ### Singleton
 -------------
@@ -40,3 +41,7 @@ Example Use Cases:
     - There should be only one Singleton instance, whereas a Flyweight class can have multiple instances with different intrinsic states.
     - The Singleton object can be mutable. Flyweight objects are immutable.
 
+### Builder
+----------
+
+fe

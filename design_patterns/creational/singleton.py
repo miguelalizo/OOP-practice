@@ -26,6 +26,7 @@ class PersonSingleton(IPerson):
         """
         if PersonSingleton.__instance:
             raise Exception("PersonSingleton can only be instantiated once.")
+
         self.name = name
         self.age = age
         PersonSingleton.__instance = self

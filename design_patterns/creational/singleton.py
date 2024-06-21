@@ -5,12 +5,16 @@ FloatInt = Union[float, int]
 
 
 class IPerson(ABC):
+    """Person Interface"""
+
     @abstractmethod
     def get_data(self):
         """Implement in child class"""
 
 
 class PersonSingleton(IPerson):
+    """Implementation of the IPerson interface"""
+
     __instance = None
 
     def __init__(self, name, age):

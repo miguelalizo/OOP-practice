@@ -23,7 +23,7 @@ class IHouseBuilder(ABC):
         """Implement in child class"""
 
     @abstractmethod
-    def build() -> House:
+    def build() -> IHouse:
         """Implement in child class"""
 
 
@@ -31,6 +31,7 @@ class RegularHouseBuilder(IHouseBuilder):
     def __init__(self):
         self.roof = None
         self.kitchen = None
+        self.garage = None
         self.rooms = []
 
     def add_roof(self, roof: str) -> Self:
@@ -49,7 +50,11 @@ class RegularHouseBuilder(IHouseBuilder):
         self.rooms.append(room)
         return self
 
-    def build(self) -> House:
+    def add_garage(self, garage: str) -> Self:
+        self.garage = garage
+        return self
+
+    def build(self) -> RegularHouse:
         if not self.roof:
             raise Exception("House creation error: House must contain a roof")
         if not self.kitchen:
@@ -58,16 +63,20 @@ class RegularHouseBuilder(IHouseBuilder):
             raise Exception(
                 "House creation error: House must contain at least one room"
             )
-        return House(roof=self.roof, kitchen=self.kitchen, rooms=self.rooms)
+        return RegularHouse(
+            roof=self.roof,
+            kitchen=self.kitchen,
+            rooms=self.rooms,
+            garage=self.garage,
+        )
 
 
-class House(IHouse):
-    def __init__(self, roof=None, kitchen=None, rooms=None, garage=None, pool=None):
+class RegularHouse(IHouse):
+    def __init__(self, roof=None, kitchen=None, rooms=None, garage=None):
         self.roof = roof
         self.kitchen = kitchen
         self.rooms = rooms
         self.garage = garage
-        self.pool = pool
 
     def print_house(self):
         print(f"Roof: {self.roof}\nKitchen: {self.kitchen}\nRooms: {self.rooms}\n")
@@ -77,9 +86,82 @@ class House(IHouse):
         return RegularHouseBuilder()
 
 
+class HouseWithPoolBuilder(IHouseBuilder):
+    def __init__(self):
+        self.roof = None
+        self.kitchen = None
+        self.rooms = []
+        self.garage = None
+        self.pool = None
+
+    def add_roof(self, roof: str) -> Self:
+        if self.roof:
+            raise Exception("House creation error: House already contains a roof")
+        self.roof = roof
+        return self
+
+    def add_kitchen(self, kitchen: str) -> Self:
+        if self.kitchen:
+            raise Exception("House creation error: House already contains a kitchen")
+        self.kitchen = kitchen
+        return self
+
+    def add_room(self, room: str) -> Self:
+        self.rooms.append(room)
+        return self
+
+    def add_garage(self, garage: str) -> Self:
+        self.garage = garage
+        return self
+
+    def add_pool(self, pool: str) -> Self:
+        self.pool = pool
+        return self
+
+    def build(self) -> HouseWithPool:
+        if not self.roof:
+            raise Exception("House creation error: HouseWithPool must contain a roof")
+        if not self.kitchen:
+            raise Exception(
+                "House creation error: HouseWithPool must contain a kitchen"
+            )
+        if not self.rooms:
+            raise Exception(
+                "House creation error: HouseWithPool must contain at least one room"
+            )
+        if not self.pool:
+            raise Exception("House creation error: HouseWithPool must contain a a pool")
+        return HouseWithPool(
+            roof=self.roof,
+            kitchen=self.kitchen,
+            rooms=self.rooms,
+            garage=self.garage,
+            pool=self.pool,
+        )
+
+
+class HouseWithPool(IHouse):
+    def __init__(self, roof=None, kitchen=None, rooms=None, garage=None, pool=None):
+        self.roof = roof
+        self.kitchen = kitchen
+        self.rooms = rooms
+        self.garage = garage
+        self.pool = pool
+
+    def print_house(self):
+        print(
+            f"Roof: {self.roof}\nKitchen: {self.kitchen}"
+            f"\nRooms: {self.rooms}\nPool: {self.pool}"
+        )
+
+    @staticmethod
+    def build_house() -> HouseWithPoolBuilder:
+        return HouseWithPoolBuilder()
+
+
 if __name__ == "__main__":
     reg_house = (
-        House.build_house()
+        RegularHouse.build_house()
         .add_roof("A-frame")
         .add_kitchen("kitchen with island")
         .add_room("living-room")
@@ -90,3 +172,17 @@ if __name__ == "__main__":
     )
 
     reg_house.print_house()
+
+    house_with_pool = (
+        HouseWithPool.build_house()
+        .add_roof("A-frame")
+        .add_kitchen("kitchen with island")
+        .add_room("living-room")
+        .add_room("bedroom-1")
+        .add_room("bedroom-2")
+        .add_room("bedroom-3")
+        .add_pool("round-pool")
+        .build()
+    )
+
+    house_with_pool.print_house()

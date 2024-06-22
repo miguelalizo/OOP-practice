@@ -44,4 +44,36 @@ Example Use Cases:
 ### Builder
 ----------
 
-fe
+Builder is a creational design pattern that lets you construct complex objects step by step. The pattern allows you to produce different types and representations of an object using the same construction code.
+
+A builder doesn’t expose the unfinished product while running construction steps. This prevents the client code from fetching an incomplete result.
+
+### [Sample Implementation](./creational/builder.py)
+
+#### Use cases
+
+- When an a complex object has many optional fields in constructor
+- Creation of the complex object can be divided into a series of steps
+    - Also if these steps require validation, then it is algo a good reason to outsource the building steps to a Builder as opposed to having that logic in the object itself
+- when you want your code to be able to create different representations of some product (for example, stone and wooden houses)
+- when construction of various representations of the product involves similar steps that differ only in the details.
+    -The base builder interface defines all possible construction steps, and concrete builders implement these steps to construct particular representations of the product. Meanwhile, the director class (optional) guides the order of construction.
+- to construct Composite trees or other complex objects.
+    - The Builder pattern lets you construct products step-by-step. You could defer execution of some steps without breaking the final product. You can even call steps recursively, which comes in handy when you need to build an object tree.
+
+A builder doesn’t expose the unfinished product while running construction steps. This prevents the client code from fetching an incomplete result.
+
+Example Use Cases:
+
+
+### Pros and Cons
+
+| Pros  | Cons |
+|-------|-------|
+| Step by step construction ofg complex objects | Complexity of the code base can increase due to creating more classes |
+| Can reuse same construction code for building different representation of products |  |
+| Single responsibility principle is enabled since creation logic can be outsourced from the object/class itself |  |
+
+
+### Relationship to other patterns
+

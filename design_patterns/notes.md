@@ -136,3 +136,37 @@ Python provides its own interface of Prototype via `copy.copy` and `copy.deepcop
 - Prototype isn’t based on inheritance, so it doesn’t have its drawbacks. On the other hand, Prototype requires a complicated initialization of the cloned object. Factory Method is based on inheritance but doesn’t require an initialization step.
 - Sometimes Prototype can be a simpler alternative to Memento. This works if the object, the state of which you want to store in the history, is fairly straightforward and doesn’t have links to external resources, or the links are easy to re-establish.
 - Abstract Factories, Builders and Prototypes can all be implemented as Singletons.
+
+
+### Abstract Factory Pattern
+----------------------------
+
+The Abstract Factory pattern is a creational design pattern that provides an interface for creating families of related or dependent objects without specifying their concrete classes. It is all about encapsulating the object creation process and ensuring that the created objects are compatible.
+
+Structure and Key Components
+
+Now, let’s dive into the structure and key components of the Abstract Factory pattern as applied to our Notification Service.
+
+- Abstract Factory: At the heart of this pattern lies the Abstract Factory interface. This interface defines a set of methods for creating each type of object within a family of related objects. In our implementation, we have the NotificationFactory interface.
+- Concrete Factories: Concrete factories are the implementations of the Abstract Factory interface.- Each concrete factory is responsible for creating a family of related objects. For instance,- FastNotifFactory, and SendBlueFactory, are each responsible for creating specific families of notification objects.
+- Abstract Products: Abstract Products are interfaces that declare a set of methods common to all objects within a family. Abstract Products, in our case, are the notification interfaces (Email, SMS, Push). These interfaces declare a set of methods that are common to all notification objects within a family.
+- Concrete Products: Concrete Products are the actual implementations of the Abstract Products. These classes provide specific implementations of the methods declared in the Abstract Products. Concrete- Products represent the actual implementations of our notification interfaces. For example, the EmailNotification and SMSNotification
+
+#### [Sample Implementation](./creational/abstract_factory.py)
+
+
+#### Use cases
+
+- When your objects have dozens of fields and hundreds of possible configurations, cloning them might serve as an alternative to subclassing
+
+#### Pros and Cons
+
+| Pros  | Cons |
+|-------|-------|
+|  | |
+|  | |
+|  | |
+
+
+#### Relationship to other pattenrs
+

@@ -154,18 +154,36 @@ Now, let’s dive into the structure and key components of the Abstract Factory 
 
 #### [Sample Implementation](./creational/abstract_factory.py)
 
+Steps:
+- Step 0: Create Factory Interface
+- Step 1: Define Concrete Factory Classes
+- Step 2: Define Abstract Product Classes
+- Step 3: Define Concrete Product Classes
+- Step 4: Create Factory Mapping Dictionary
+    - I like using enumerated keys
+
+
 
 #### Use cases
+- GUI Library for Cross-Platform Applications:
+    - Implement an abstract factory to create GUI components like buttons, windows, and dialogs that are tailored for different operating systems (e.g., Windows, macOS, Linux)
+- Database Abstraction Layer:
+    - When dealing with databases, you might need to support multiple database management systems, such as MySQL, PostgreSQL, and SQLite. The Abstract Factory pattern allows you to switch between database systems seamlessly by creating a factory for each database, ensuring that the appropriate database-specific objects are used throughout your application.
+- Document Generation:
+    - Design an abstract factory for generating documents (e.g., PDF, HTML, Word) with different formatting and styling options.
+- Game Development:
+    - Create an abstract factory to generate various in-game assets, such as characters, weapons, or power-ups, with different properties and behaviors.
 
-- When your objects have dozens of fields and hundreds of possible configurations, cloning them might serve as an alternative to subclassing
 
 #### Pros and Cons
 
 | Pros  | Cons |
 |-------|-------|
-|  | |
-|  | |
-|  | |
+| Encapsulation: The pattern encapsulates the creation of related objects, making it easier to change or extend object families without affecting the client code. | |
+| Consistency: It ensures that the created objects are compatible with each other, maintaining consistency throughout the application. | |
+| Scalability: As your application grows, you can add new concrete factories and products without modifying existing code, promoting scalability. | |
+| Separation of Concerns: The pattern enforces a clear separation between client code and object creation, adhering to the Single Responsibility Principle. | |
+
 
 
 #### Relationship to other pattenrs

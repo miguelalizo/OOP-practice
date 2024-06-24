@@ -6,6 +6,7 @@ Our service also integrates with two different imaginary
 notification SAAS providers: FastNotif and SendBlue.
 """
 
+from __future__ import annotations
 from abc import ABC, abstractmethod
 from enum import Enum
 
@@ -23,38 +24,38 @@ class NotificationFactory(ABC):
     """
 
     @abstractmethod
-    def create_email_notification(self):
+    def create_email_notification(self) -> AbstractEmailNotification:
         pass
 
     @abstractmethod
-    def create_sms_notification(self):
+    def create_sms_notification(self) -> AbstractSMSNotification:
         pass
 
     @abstractmethod
-    def create_push_notification(self):
+    def create_push_notification(self) -> AbstractPushNotification:
         pass
 
 
 # 1. Define Concrete Factories
 class FastNotifFactory(NotificationFactory):
-    def create_email_notification(self):
+    def create_email_notification(self) -> FastNotifEmailNotification:
         return FastNotifEmailNotification()
 
-    def create_sms_notification(self):
+    def create_sms_notification(self) -> FastNotifSMSNotification:
         return FastNotifSMSNotification()
 
-    def create_push_notification(self):
+    def create_push_notification(self) -> FastNotifPushNotification:
         return FastNotifPushNotification()
 
 
 class SendBlueFactory(NotificationFactory):
-    def create_email_notification(self):
+    def create_email_notification(self) -> SendBlueEmailNotification:
         return SendBlueEmailNotification()
 
-    def create_sms_notification(self):
+    def create_sms_notification(self) -> SendBlueSMSNotification:
         return SendBlueSMSNotification()
 
-    def create_push_notification(self):
+    def create_push_notification(self) -> SendBlueEmailNotification:
         return SendBluePushNotification()
 
 
@@ -104,7 +105,7 @@ class FastNotifEmailNotification(AbstractEmailNotification):
     def send(self):
         print("FastNotif: sending Email notification")
 
-    def format_content():
+    def format_content(self):
         print("FastNotif: formatting Email content")
 
 
@@ -114,7 +115,7 @@ class FastNotifSMSNotification(AbstractSMSNotification):
     def send(self):
         print("FastNotif: sending SMS notification")
 
-    def encode_content():
+    def encode_content(self):
         print("FastNotif: formatting SMS content")
 
 
@@ -124,7 +125,7 @@ class FastNotifPushNotification(AbstractPushNotification):
     def send(self):
         print("FastNotif: sending Push notification")
 
-    def format_payload():
+    def format_payload(self):
         print("FastNotif: formatting Push content")
 
 
@@ -134,7 +135,7 @@ class SendBlueEmailNotification(AbstractEmailNotification):
     def send(self):
         print("SendBlue: sending Email notification")
 
-    def format_content():
+    def format_content(self):
         print("SendBlue: formatting Email content")
 
 
@@ -144,7 +145,7 @@ class SendBlueSMSNotification(AbstractSMSNotification):
     def send(self):
         print("SendBlue: sending SMS notification")
 
-    def encode_content():
+    def encode_content(self):
         print("SendBlue: formatting SMS content")
 
 
@@ -154,7 +155,7 @@ class SendBluePushNotification(AbstractPushNotification):
     def send(self):
         print("SendBlue: sending Push notification")
 
-    def format_payload():
+    def format_payload(self):
         print("SendBlue: formatting Push content")
 
 
@@ -179,21 +180,26 @@ def select_notification(provider: NotificationType) -> NotificationFactory:
 
 
 if __name__ == "__main__":
-    other = select_notification("other")
     # client code
 
     fast_notif = select_notification(NotificationType.FastNotif)
     # send email notification through FastNotif
+    fast_notif.create_email_notification().format_content()
     fast_notif.create_email_notification().send()
     # send SMS notification through FastNotif
+    fast_notif.create_sms_notification().encode_content()
     fast_notif.create_sms_notification().send()
     # send Push notification through FastNotif
+    fast_notif.create_push_notification().format_payload()
     fast_notif.create_push_notification().send()
 
     send_blue = select_notification(NotificationType.SendBlue)
     # send email notification through BlueNotif
+    send_blue.create_email_notification().format_content()
     send_blue.create_email_notification().send()
     # send SMS notification through BlueNotif
+    send_blue.create_sms_notification().encode_content()
     send_blue.create_sms_notification().send()
     # send Push notification through BlueNotif
+    send_blue.create_push_notification().format_payload()
     send_blue.create_push_notification().send()

@@ -174,11 +174,12 @@ def select_notification(provider: NotificationType) -> NotificationFactory:
     """Select and return Notification Factory based on the provider"""
     factory = factory_mapping.get(provider)
     if factory is None:
-        raise ValueError("Invalid provider")
+        raise ValueError(f"Invalid provider '{provider}'")
     return factory
 
 
 if __name__ == "__main__":
+    other = select_notification("other")
     # client code
 
     fast_notif = select_notification(NotificationType.FastNotif)

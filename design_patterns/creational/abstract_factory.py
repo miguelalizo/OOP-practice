@@ -80,7 +80,7 @@ class AbstractSMSNotification(ABC):
         pass
 
     @abstractmethod
-    def format_content(self):
+    def encode_content(self):
         pass
 
 
@@ -93,7 +93,7 @@ class AbstractPushNotification(ABC):
         pass
 
     @abstractmethod
-    def format_content(self):
+    def format_payload(self):
         pass
 
 
@@ -114,7 +114,7 @@ class FastNotifSMSNotification(AbstractSMSNotification):
     def send(self):
         print("FastNotif: sending SMS notification")
 
-    def format_content():
+    def encode_content():
         print("FastNotif: formatting SMS content")
 
 
@@ -124,7 +124,7 @@ class FastNotifPushNotification(AbstractPushNotification):
     def send(self):
         print("FastNotif: sending Push notification")
 
-    def format_content():
+    def format_payload():
         print("FastNotif: formatting Push content")
 
 
@@ -144,7 +144,7 @@ class SendBlueSMSNotification(AbstractSMSNotification):
     def send(self):
         print("SendBlue: sending SMS notification")
 
-    def format_content():
+    def encode_content():
         print("SendBlue: formatting SMS content")
 
 
@@ -154,7 +154,7 @@ class SendBluePushNotification(AbstractPushNotification):
     def send(self):
         print("SendBlue: sending Push notification")
 
-    def format_content():
+    def format_payload():
         print("SendBlue: formatting Push content")
 
 

@@ -13,7 +13,7 @@ This design pattern ensures only one instance of a class can be created, providi
     - it also protects that instance from being overwritten by other code
         - meaning that somewhere else in the program, you wont be able to create a new instance and "override" the old one because only one can exist
 
-### [Sample Implementation](./creational/singleton.py)
+#### [Sample Implementation](./creational/singleton.py)
 
 #### Use cases
 
@@ -53,7 +53,7 @@ Builder is a creational design pattern that lets you construct complex objects s
 
 A builder doesn’t expose the unfinished product while running construction steps. This prevents the client code from fetching an incomplete result.
 
-### [Sample Implementation](./creational/builder.py)
+#### [Sample Implementation](./creational/builder.py)
 
 #### Use cases
 
@@ -90,3 +90,49 @@ Example Use Cases:
 - You can use Builder when creating complex Composite trees because you can program its construction steps to work recursively
 - You can combine Builder with Bridge
     - the director class plays the role of the abstraction, while different builders act as implementations
+
+### Prototype
+-------------
+The Prototype pattern delegates the cloning process to the actual objects that are being cloned.
+
+The pattern declares a common interface for all objects that support cloning. This interface lets you clone an object without coupling your code to the class of that object. Usually, such an interface contains just a single clone method.
+
+An object that supports cloning is called a prototype.
+
+Prototype pattern provides a way to replicate an object.
+
+- This is helpful because (in some languages) the fields needed to copy an object can be private/inaccessible.
+- Additionally, this helps decouple your code from the class that you are trying to make a copy from.
+    - What if you're trying to create a copy/clone of an object and so you write code to do that for all it's fields. Then the class of the copied object changes?
+        - Your code is coupled and is now out of date
+        - Therefore it is better for the class itself to provide an API for copying/cloning if it is necessary
+- When your objects have dozens of fields and hundreds of possible configurations, cloning them might serve as an alternative to subclassing
+
+
+#### [Sample Implementation](./creational/prototype.py)
+
+Python provides its own interface of Prototype via `copy.copy` and `copy.deepcopy` functions. And any class that wants to implement custom implementations have to override `__copy__` and `__deepcopy__` member functions.
+
+#### Use cases
+
+- When your objects have dozens of fields and hundreds of possible configurations, cloning them might serve as an alternative to subclassing
+
+#### Pros and Cons
+
+| Pros  | Cons |
+|-------|-------|
+|  You can clone objects without coupling to their concrete classes. |  Cloning complex objects that have circular references might be very tricky. |
+| You can get rid of repeated initialization code in favor of cloning pre-built prototypes.  | |
+|  You can produce complex objects more conveniently. | |
+| You get an alternative to inheritance when dealing with configuration presets for complex objects. | |
+
+
+#### Relationship to other pattenrs
+
+- Many designs start by using Factory Method (less complicated and more customizable via subclasses) and evolve toward Abstract Factory, Prototype, or Builder (more flexible, but more complicated).
+- Abstract Factory classes are often based on a set of Factory Methods, but you can also use Prototype to compose the methods on these classes.
+- Prototype can help when you need to save copies of Commands into history.
+- Designs that make heavy use of Composite and Decorator can often benefit from using Prototype. Applying the pattern lets you clone complex structures instead of re-constructing them from scratch.
+- Prototype isn’t based on inheritance, so it doesn’t have its drawbacks. On the other hand, Prototype requires a complicated initialization of the cloned object. Factory Method is based on inheritance but doesn’t require an initialization step.
+- Sometimes Prototype can be a simpler alternative to Memento. This works if the object, the state of which you want to store in the history, is fairly straightforward and doesn’t have links to external resources, or the links are easy to re-establish.
+- Abstract Factories, Builders and Prototypes can all be implemented as Singletons.

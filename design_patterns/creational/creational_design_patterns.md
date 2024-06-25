@@ -1,5 +1,3 @@
-# OOP Design Patterns
-
 ## Creational Patterns
 ----------------------
 
@@ -138,6 +136,23 @@ Python provides its own interface of Prototype via `copy.copy` and `copy.deepcop
 - Abstract Factories, Builders and Prototypes can all be implemented as Singletons.
 
 
+### Factory Method Pattern
+----------------------------
+
+#### [Sample Implementation](./creational/factory_method.py)
+
+#### Use cases
+
+
+#### Pros and Cons
+
+| Pros  | Cons |
+|-------|-------|
+| | |
+
+#### Relationship to other pattenrs
+
+
 ### Abstract Factory Pattern
 ----------------------------
 
@@ -179,12 +194,55 @@ Steps:
 
 | Pros  | Cons |
 |-------|-------|
-| Encapsulation: The pattern encapsulates the creation of related objects, making it easier to change or extend object families without affecting the client code. | |
-| Consistency: It ensures that the created objects are compatible with each other, maintaining consistency throughout the application. | |
-| Scalability: As your application grows, you can add new concrete factories and products without modifying existing code, promoting scalability. | |
+| Encapsulation: The pattern encapsulates the creation of related objects, making it easier to change or extend object families without affecting the client code. | Complexity: Implementing the Abstract Factory pattern can introduce additional complexity, especially when dealing with a large number of concrete factories and products. |
+| Consistency: It ensures that the created objects are compatible with each other, maintaining consistency throughout the application. | Extensibility: Adding new types of products often requires modifying the Abstract Factory interface and all its concrete factory implementations, which can be cumbersome. |
+| Scalability: As your application grows, you can add new concrete factories and products without modifying existing code, promoting scalability. | Runtime Configuration: Selecting the appropriate concrete factory at runtime can be challenging, especially when the configuration is dynamic. |
 | Separation of Concerns: The pattern enforces a clear separation between client code and object creation, adhering to the Single Responsibility Principle. | |
-
 
 
 #### Relationship to other pattenrs
 
+##### Factory Method vs. Abstract Factory
+
+We compare them to clarify their distinct scopes in object creation. Both patterns share the goal of encapsulating object-creation processes.
+- Factory Method Pattern:
+    - Creates a single product using subclasses with a method for each product. Focuses on individual product creation.
+- Abstract Factory Pattern:
+    - Creates entire families of related products with consistent interfaces. Emphasizes creating multiple related objects.
+
+
+##### Builder vs. Abstract Factory
+
+We compare the Builder and Abstract Factory to differentiate their roles in object construction.
+- Builder Pattern:
+    - Constructs complex objects step by step, often with a director class. Concentrates on the construction process and variations of a single product.
+- Abstract Factory Pattern:
+    - Creates multiple related objects with compatible interfaces. Abstracts the creation of entire product families.
+
+
+##### Prototype vs. Abstract Factory
+
+We compare the Prototype and Abstract Factory to distinguish their approaches to object creation.
+
+- Prototype Pattern:
+    - Creates new objects by copying existing prototypes. Efficient for objects sharing similar structures.
+- Abstract Factory Pattern:
+    - Creates families of related objects, abstracting their creation but not copying existing objects.
+
+##### Facade vs. Abstract Factory
+
+We compare the Facade and Abstract Factory to highlight their distinct roles in simplifying system interaction. While their primary goals differ, both patterns aim to simplify complex systems.
+
+- Facade Pattern:
+    - Provides a simplified interface to a subsystem, simplifying client interaction with complex systems.
+- Abstract Factory Pattern:
+    - Focuses on creating compatible sets of related objects. Both can be used together to simplify complex systems.
+
+##### Bridge vs. Abstract Factory
+
+We compare the Bridge and Abstract Factory to illustrate their roles in managing object structures. Both patterns address object abstraction and composition.
+
+- Bridge Pattern:
+    - Separates an object’s abstraction from its implementation, allowing it to vary independently. Manages complex hierarchies.
+- Abstract Factory Pattern:
+    - Focuses on creating compatible sets of objects within a family. Addresses abstraction and composition but serves different goals.

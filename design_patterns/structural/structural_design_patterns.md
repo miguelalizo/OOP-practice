@@ -175,3 +175,41 @@ Decorator is a structural design pattern that lets you attach new behaviors to o
 | You can extend an objects behavior without making new subclasses |  It's hard to remove a specific wrapper from the wrapper stack |
 | You can add or remove responsibilities from an object at runtime | Hard to implement a decorator in such a way that its behavior does not depend on the decorator stack |
 | Single responsibility principle! You can divide a monolothic class that implements many different variants of behavior into several smaller classes | The initial configuration code of layer might look pretty ugly |
+
+## Facade
+
+Facade is a structural design pattern that provides a simplified interface to a library, a framework, or any other complex set of classes.
+
+Identification: Facade can be recognized in a class that has a simple interface, but delegates most of the work to other classes. Usually, facades manage the full life cycle of objects they use.
+
+Usage examples: The Facade pattern is commonly used in apps written in Python. It’s especially handy when working with complex libraries and APIs.
+
+### [Sample implementation](./facade.py)
+
+![facade](./static/facade.png)
+
+### When to use
+
+- Having a facade is handy when you need to integrate your app with a sophisticated library that has dozens of features, but you just need a tiny bit of its functionality.
+-  Use the Facade pattern when you need to have a limited but straightforward interface to a complex subsystem.
+    -  Often, subsystems get more complex over time. Even applying design patterns typically leads to creating more classes. A subsystem may become more flexible and easier to reuse in various contexts, but the amount of configuration and boilerplate code it demands from a client grows ever larger. The Facade attempts to fix this problem by providing a shortcut to the most-used features of the subsystem which fit most client requirements.
+- Use the Facade when you want to structure a subsystem into layers.
+    - Create facades to define entry points to each level of a subsystem. You can reduce coupling between multiple subsystems by requiring them to communicate only through facades.
+
+
+
+### Pros and cons
+
+| Pros | Cons |
+| ____ | ____ |
+| You can isolate your code from the complexity of a subsystem | A facade can become a god object coupled to all classes of an app |
+
+### Relationships to other patterns
+
+- Facade defines a new interface for existing objects, whereas Adapter tries to make the existing interface usable. Adapter usually wraps just one object, while Facade works with an entire subsystem of objects.
+- Abstract Factory can serve as an alternative to Facade when you only want to hide the way the subsystem objects are created from the client code.
+- Flyweight shows how to make lots of little objects, whereas Facade shows how to make a single object that represents an entire subsystem.
+- Facade and Mediator have similar jobs: they try to organize collaboration between lots of tightly coupled classes.
+    - Facade defines a simplified interface to a subsystem of objects, but it doesn’t introduce any new functionality. The subsystem itself is unaware of the facade. Objects within the subsystem can communicate directly.
+    - Mediator centralizes communication between components of the system. The components only know about the mediator object and don’t communicate directly.
+- Facade is similar to Proxy in that both buffer a complex entity and initialize it on its own. Unlike Facade, Proxy has the same interface as its service object, which makes them interchangeable.

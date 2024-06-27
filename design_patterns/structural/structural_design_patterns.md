@@ -69,3 +69,109 @@ Identification: Adapter is recognizable by a constructor which takes an instance
 - With Adapter you access an existing object via different interface. With Proxy, the interface stays the same. With Decorator you access the object via an enhanced interface.
 - Facade defines a new interface for existing objects, whereas Adapter tries to make the existing interface usable. Adapter usually wraps just one object, while Facade works with an entire subsystem of objects.
 - Bridge, State, Strategy (and to some degree Adapter) have very similar structures. Indeed, all of these patterns are based on composition, which is delegating work to other objects. However, they all solve different problems. A pattern isn’t just a recipe for structuring your code in a specific way. It can also communicate to other developers the problem the pattern solves.
+
+
+## Bridge
+
+The Bridge Design Pattern is a structural design pattern that decouples an abstraction from its implementation so that both can vary independently. It does so by creating two separate hierarchies: one for abstractions and another for implementations. These hierarchies are then linked through composition, allowing for flexible combinations.
+
+Meaning: The abstraction holds an instance of the implementation interface and uses it in the same way regardless of what concrete implementation is being used.
+- This allows more implementations to be added or removed without needing to ever change the abstraction class (as long as they maintain the implementation's contract)
+
+#### Use this pattern when
+-  Use the Bridge pattern when you want to divide and organize a monolithic class that has several variants of some functionality (for example, if the class can work with various database servers).
+- Use the pattern when you need to extend a class in several orthogonal (independent) dimensions.
+    - The Bridge suggests that you extract a separate class hierarchy for each of the dimensions. The original class delegates the related work to the objects belonging to those hierarchies instead of doing everything on its own.
+- Use the Bridge if you need to be able to switch implementations at runtime.
+
+
+### Key Components
+
+1. Abstraction: Defines the interface for the “abstraction” part of the system and maintains a reference to an object of the “implementation” hierarchy.
+2. Refined Abstraction: Extends the abstraction interface with additional methods or behaviors.
+3. Implementation: Defines the interface for the “implementation” part of the system.
+4. Concrete Implementation: Provides concrete implementations of the “implementation” interface.
+5. Client: Utilizes the abstraction to interact with the implementation.
+
+Usage examples: The Bridge pattern is especially useful when dealing with cross-platform apps, supporting multiple types of database servers or working with several API providers of a certain kind (for example, cloud platforms, social networks, etc.)
+
+Identification: Bridge can be recognized by a clear distinction between some controlling entity and several different platforms that it relies on.
+
+### [Sample Implementation](./bridge.py)
+
+![bridge](./static/bridge.png)
+
+### Pros and Cons
+
+| Pros  | Cons |
+|-------|-------|
+|  You can create platform-independent classes and apps.  | You might make the code more complicated by applying the pattern to a highly cohesive class. |
+| The client code works with high-level abstractions. It isn’t exposed to the platform details. |  |
+| Open/Closed Principle. You can introduce new abstractions and implementations independently from each other. | |
+| Single Responsibility Principle. You can focus on high-level logic in the abstraction and on platform details in the implementation. | |
+
+### Relationships to other pattenrs
+- Bridge is usually designed up-front, letting you develop parts of an application independently of each other. On the other hand, Adapter is commonly used with an existing app to make some otherwise-incompatible classes work together nicely.
+- Bridge, State, Strategy (and to some degree Adapter) have very similar structures. Indeed, all of these patterns are based on composition, which is delegating work to other objects. However, they all solve different problems. A pattern isn’t just a recipe for structuring your code in a specific way. It can also communicate to other developers the problem the pattern solves.
+
+
+
+## Composite
+
+The Composite Design Pattern is a structural approach that organizes objects into tree-like structures, uniformly treating individual objects and compositions.
+
+### When to use
+
+The Composite Pattern suits tasks needing a tree-like structure where elements and collections are handled similarly.
+
+- Hierarchical Structures: Employ when creating tree-like systems where elements share common handling.
+- Complex Relationships: Ideal for managing intricate connections among objects, and simplifying software structures.
+- Unified Element Management: Use to streamline handling various elements uniformly within software hierarchies.
+
+### [Sample implementation](composite.py)
+
+![composite](./static/composite.png)
+
+### Key Concepts
+
+- Component Interface:
+    - This sets the rules for all elements involved, defining common behaviors or attributes.
+- Leaf:
+    - Represents individual objects that don’t contain other elements, functioning as the basic building blocks.
+- Composite:
+    - Acts as a container that can hold both Leaf and other Composite instances, forming the structure.
+
+### Pros and Cons
+
+| Pros | Cons |
+| ---- | ---- |
+| You can work with complex tree structures more conveniently: use polymorphism and recursion to your advantage. |  It might be difficult to provide a common interface for classes whose functionality differs too much. In certain scenarios, you’d need to overgeneralize the component interface, making it harder to comprehend. |
+| Open/Closed Principle. You can introduce new element types into the app without breaking the existing code, which now works with the object tree. | |
+
+## Decorator
+
+Decorator is a structural design pattern that lets you attach new behaviors to objects by placing these objects inside special wrapper objects that contain the behaviors.
+
+### When to use
+
+### [Sample implementation: OOP](decorator_oop.py)
+### [Sample implementation: Functional](decorator_func.py)
+
+![decorator](./static/decorator.png)
+
+
+
+### Key Concepts
+
+- Use the Decorator pattern when you need to be able to assign extra behaviors to objects at runtime without breaking the code that uses these objects.
+    - The Decorator lets you structure your business logic into layers, create a decorator for each layer and compose objects with various combinations of this logic at runtime. The client code can treat all these objects in the same way, since they all follow a common interface.
+- Use the pattern when it’s awkward or not possible to extend an object’s behavior using inheritance.
+
+
+### Pros and Cons
+
+| Pros | Cons |
+| ---- | ---- |
+| You can extend an objects behavior without making new subclasses |  It's hard to remove a specific wrapper from the wrapper stack |
+| You can add or remove responsibilities from an object at runtime | Hard to implement a decorator in such a way that its behavior does not depend on the decorator stack |
+| Single responsibility principle! You can divide a monolothic class that implements many different variants of behavior into several smaller classes | The initial configuration code of layer might look pretty ugly |

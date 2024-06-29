@@ -1,7 +1,17 @@
 ## Creational Patterns
 ----------------------
 
-### Singleton
+
+## Table of Contents
+
+1. [Singleton](#singleton)
+1. [Builder](#builder)
+1. [Prototype](#prototype)
+1. [Factory Method](#factory-method)
+1. [Abstract Factory](#abstract-factory-pattern)
+
+
+## Singleton
 -------------
 
 This design pattern ensures only one instance of a class can be created, providing global access to that instance.
@@ -44,7 +54,7 @@ Example Use Cases:
     - There should be only one Singleton instance, whereas a Flyweight class can have multiple instances with different intrinsic states.
     - The Singleton object can be mutable. Flyweight objects are immutable.
 
-### Builder
+## Builder
 ----------
 
 Builder is a creational design pattern that lets you construct complex objects step by step. The pattern allows you to produce different types and representations of an object using the same construction code.
@@ -89,8 +99,8 @@ Example Use Cases:
 - You can combine Builder with Bridge
     - the director class plays the role of the abstraction, while different builders act as implementations
 
-### Prototype
--------------
+## Prototype
+------------
 The Prototype pattern delegates the cloning process to the actual objects that are being cloned.
 
 The pattern declares a common interface for all objects that support cloning. This interface lets you clone an object without coupling your code to the class of that object. Usually, such an interface contains just a single clone method.
@@ -136,8 +146,8 @@ Python provides its own interface of Prototype via `copy.copy` and `copy.deepcop
 - Abstract Factories, Builders and Prototypes can all be implemented as Singletons.
 
 
-### Factory Method Pattern
-----------------------------
+## Factory Method
+-------------------------
 
 #### [Sample Implementation](./creational/factory_method.py)
 
@@ -153,7 +163,7 @@ Python provides its own interface of Prototype via `copy.copy` and `copy.deepcop
 #### Relationship to other pattenrs
 
 
-### Abstract Factory Pattern
+## Abstract Factory Pattern
 ----------------------------
 
 The Abstract Factory pattern is a creational design pattern that provides an interface for creating families of related or dependent objects without specifying their concrete classes. It is all about encapsulating the object creation process and ensuring that the created objects are compatible.

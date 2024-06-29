@@ -257,3 +257,37 @@ The Flyweight pattern suggests separating extrinsic state from objects, preservi
 | RAM Savings | CPU Overhead: trading memory (by keeping a common flyweight elements pool) for CPU cycles since the application has to check if one exists before creating it |
 | | Increased code complexity with the FlyweightFactory and separation of entity states  |
 
+
+## Proxy
+
+Proxy is like facade and decorator had a baby together.
+
+The Proxy Design Pattern is a structural pattern that provides an interface to another object, acting as an intermediary or surrogate. It is used when we want to control access to an object, add some functionality before or after accessing it, or delay the creation of an object until it is actually needed. Think of it as a virtual representation of the real object, allowing you to manage its lifecycle and interactions.
+
+### When to use
+
+- Expensive Object Loading: When dealing with complex or resource-intensive objects, consider the Virtual Proxy. It acts as a placeholder, loading the full object on demand, and optimizing resource usage.
+    - allows for lazy creation of the inner object
+- Remote Object Access: If the original object is in a different address space and you need local-like interaction, opt for the Remote Proxy. It manages connection details, making remote objects appear local.
+    - in this way it kind of acs like a facade
+- Enhanced Security: Employ the Proxy pattern for added security. The Protection Proxy enforces controlled access based on client rights, safeguarding sensitive resources.
+
+### [Sample Implementation](./proxy.py)
+
+### Key Elements
+
+- Proxy Interface: The Proxy Interface defines the methods that both the Real Subject and the Proxy must implement. This ensures that the Proxy is a true substitute for the Real Subject.
+- Real Subject: The Real Subject is the actual object that the Proxy represents. It implements the Proxy Interface and performs the real business logic.
+- Proxy: The Proxy is the intermediary between the client and the Real Subject. It also implements the Proxy Interface, but it doesn’t perform the core logic itself. Instead, it delegates the calls to the Real Subject, potentially adding additional functionality before or after the delegation.
+
+![proxy](./static/proxy.png)
+
+### Types of Proxies
+
+The Proxy pattern’s versatility is underscored by its ability to adapt to diverse use cases, leading to various types of proxies. Let’s embark on an expedition to acquaint ourselves with these types:
+
+- Virtual Proxy: A Virtual Proxy is all about deferring a resource-intensive object loading until explicitly required. It creates a placeholder for an expensive or resource-intensive object. This object is only instantiated when a client requests it. Until then, the proxy manages the access.
+- Remote Proxy: Relays communication with objects residing in different address spaces or on remote servers. The proxy handles communication details, such as network connections, serialization, and deserialization, while the client interacts with the proxy as if it were the real object.
+- Protection Proxy: Takes on the role of a vigilant gatekeeper, applying a robust authentication and authorization layer in front of the real object. This additional layer of security ensures that access to the real object is granted only to authorized entities, safeguarding sensitive resources.
+- Smart Reference: When you need to dismiss a heavyweight object once it’s no longer in use, the Smart Reference shines. It tracks active clients and periodically checks their status. If no clients are using the object, the proxy releases it, freeing system resources. It also monitors modifications to the object, allowing for reuse when unchanged.
+

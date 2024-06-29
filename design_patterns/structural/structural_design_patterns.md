@@ -213,3 +213,47 @@ Usage examples: The Facade pattern is commonly used in apps written in Python. I
     - Facade defines a simplified interface to a subsystem of objects, but it doesn’t introduce any new functionality. The subsystem itself is unaware of the facade. Objects within the subsystem can communicate directly.
     - Mediator centralizes communication between components of the system. The components only know about the mediator object and don’t communicate directly.
 - Facade is similar to Proxy in that both buffer a complex entity and initialize it on its own. Unlike Facade, Proxy has the same interface as its service object, which makes them interchangeable.
+
+The Flyweight pattern suggests separating extrinsic state from objects, preserving the intrinsic state for reuse across contexts. This minimizes object instances, as they mainly differ in intrinsic state, simplifying the system.
+
+### When to use
+- Large Number of Objects: When your application needs to create a large number of objects with shared intrinsic state.
+- Memory Optimization: If memory optimization is a concern and you want to reduce the memory footprint by sharing common state among multiple objects.
+- Immutable State: When the objects can be made immutable or the shared state can be safely shared among multiple instances without risk of modification.
+- Performance Improvement: If performance improvement is desired by minimizing object creation and reducing redundant data storage.
+- Extrinsic State Separation: When it’s feasible to separate the intrinsic state (shared among objects) from the extrinsic state (unique to each object) to optimize memory usage.
+
+
+## Flyweight
+
+- commonly used to manage objects that share similar or identical states.
+- The key idea behind the Flyweight pattern is to separate the intrinsic state (shared among multiple objects) from the extrinsic state (unique to each object).
+    - Intrinsic State: This refers to constant data stored within an object, residing solely within the object itself and immutable by external entities. It remains consistent across different contexts and is shared among multiple objects.
+    - Extrinsic State: Conversely, the extrinsic state represents the variable data of an object, influenced or altered by external factors or objects. This state is dynamic and can vary between different instances of the same object.
+
+### [Sample implementation](./flyweight.py)
+
+### Key Concepts
+
+- Flyweight: Contains the intrinsic state shared between multiple objects, with the same flyweight object usable in various contexts. It stores the intrinsic state and receives the extrinsic state from the context.
+- Context: Holds the extrinsic state unique across all original objects. When paired with a flyweight object, it represents the full state of the original object.
+- Client: Calculates or stores the extrinsic state of flyweights. It treats flyweights as template objects and configures them at runtime by passing contextual data into their methods.
+- Flyweight Factory: Manages a pool of existing flyweights, handling their creation and reuse. **Clients interact with the factory to obtain flyweight instances, passing intrinsic state for retrieval or creation**.
+
+~[flyweight](./static/flyweight.png)
+
+### Real world uses
+
+- Graphics Processing Units (GPUs): GPU frameworks like OpenGL and DirectX use Flyweight to efficiently manage textures and vertex data.
+- Python Interning: Python caches small integers and certain strings using Flyweight to optimize memory usage.
+- Database Connection Pools: Connection pool implementations in frameworks like Apache DBCP and HikariCP use Flyweight to manage and reuse database connections efficiently.
+- Object Pooling Libraries: Libraries like Apache Commons Pool and ObjectPool use Flyweight to pool and reuse objects, reducing object creation overhead.
+- Caching Libraries: Caching frameworks like Ehcache and Redis use Flyweight to cache objects and reduce memory usage.
+
+### Pros and cons
+
+| Pros | Cons |
+| ---- | ---- |
+| RAM Savings | CPU Overhead: trading memory (by keeping a common flyweight elements pool) for CPU cycles since the application has to check if one exists before creating it |
+| | Increased code complexity with the FlyweightFactory and separation of entity states  |
+

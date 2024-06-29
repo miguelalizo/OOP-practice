@@ -1,5 +1,15 @@
 # Structural Design Patterns
 
+## Table of Contents
+
+1. [Adapter](#adapter)
+1. [Bridge](#bridge)
+1. [Composite](#composite)
+1. [Decorator](#decorator)
+1. [Facade](#facade)
+1. [Flyweight](#flyweight)
+1. [Proxy](#proxy)
+
 ## Adapter
 
 

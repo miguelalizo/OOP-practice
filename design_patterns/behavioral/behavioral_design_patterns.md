@@ -3,6 +3,7 @@
 ## Table of Contents
 
 1. [Chain of Responsibility](#chain-of-responsibility)
+1. [Command](#command)
 
 ## Chain of Responsibility
 
@@ -69,15 +70,46 @@ Identification: The pattern is recognizable by behavioral methods of one group o
 
 ## Command
 
+The Command design pattern is a behavioral pattern that encapsulates a request as an object, thereby allowing for parameterization of clients with different requests, queuing of requests, and logging of requests.
 
+It separates the sender of a request from the receiver, providing a means for decoupling invokers and receivers.
 
 ### When to use
 
+- Complex Interfaces: Ideal for applications with intricate user interfaces, simplifying action management, including undo/redo, toolbar customization, and shortcuts.
+- Queueing Tasks: Useful for queuing and scheduling tasks or commands, facilitating orderly execution, vital for automation and task management.
+- Undo/Redo Needs: Valuable in applications requiring strong undo and redo capabilities, like design software or text editors, improving user productivity.
 
 ### [Sample Implementation](./command.py)
 
 ![chain](./static/command.png)
 
-### Key Concepts
+### Key Components
+
+- Command: This is an interface or an abstract class that declares an execute method. Concrete command classes implement this method, encapsulating the action to be performed.
+- Concrete Command: These are the concrete implementations of the Command interface. They hold a reference to a receiver object and invoke specific actions on it.
+- Receiver: The Receiver is the object that actually performs the action associated with the command.
+- Invoker: The Invoker is responsible for storing and executing commands. It doesn’t need to know the specifics of how the command is executed.
+
+By structuring your code this way, you achieve a high degree of decoupling. The sender (Invoker) doesn’t need to know anything about the receiver or how the command is handled.
+
 
 ### Pros and Cons
+
+| Pros | Cons |
+| ---- | ---- |
+| Decoupling: The pattern decouples the sender and receiver of a request, providing flexibility in managing commands and actions. | Complexity: Implementing the pattern can increase code complexity. |
+| Multi-Level Undo/Redo: The Command Pattern is ideal for implementing multi-level undo/redo functionality, as each command can be stored and reversed. | Overhead: It may introduce a minor memory and performance overhead. |
+| Extensibility: New commands can be added without altering existing code, making the system more extensible. | Applicability: Assess if the pattern suits your specific needs, as its benefits are most pronounced in scenarios requiring command decoupling and undo/redo functionality. |
+
+### Relationships to other patterns
+
+- Command and Chain of Responsibility patterns are both about managing requests and actions, but they do so differently.
+    - Command Pattern: Encapsulates a request as an object, decoupling the sender and receiver. It’s ideal for implementing multi-level undo/redo functionality and handling actions.
+    - Chain of Responsibility Pattern: Passes a request through a chain of handlers. It’s used when you want to give more than one object a chance to handle a request without specifying the receiver explicitly. Unlike the Command Pattern, it doesn’t encapsulate a command but focuses on finding the right handler.
+- Command and Mediator patterns deal with connections between senders and receivers, yet they have distinct communication approaches.
+    - Command Pattern: Focuses on encapsulating and decoupling commands, allowing for undo/redo functionality. It doesn’t necessarily involve communication between multiple objects.
+    - Mediator Pattern: Defines an object that encapsulates how a set of objects interact. It promotes loose coupling by centralizing communication between objects. While it can be used in conjunction with the Command Pattern, its primary purpose is different.
+- Command and Observer patterns address how receivers subscribe and receive requests, but their primary roles vary.
+    - Command Pattern: Encapsulates commands and decouples senders from receivers. It’s suitable for scenarios where actions need to be executed without sender-receiver dependencies.
+    - Observer Pattern: Defines a one-to-many dependency between objects. When one object (the subject) changes state, all its dependents (observers) are notified and updated automatically. While both patterns support decoupling, the Observer Pattern is more about keeping objects in sync with a changing subject.

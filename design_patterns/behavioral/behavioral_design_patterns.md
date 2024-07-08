@@ -175,3 +175,52 @@ This way the context becomes independent of concrete strategies, so you can add 
 - Decorator lets you change the skin of an object, while Strategy lets you change the guts.
 - Template Method is based on inheritance: it lets you alter parts of an algorithm by extending those parts in subclasses. Strategy is based on composition: you can alter parts of the object’s behavior by supplying it with different strategies that correspond to that behavior. Template Method works at the class level, so it’s static. Strategy works on the object level, letting you switch behaviors at runtime.
 - State can be considered as an extension of Strategy. Both patterns are based on composition: they change the behavior of the context by delegating some work to helper objects. Strategy makes these objects completely independent and unaware of each other. However, State doesn’t restrict dependencies between concrete states, letting them alter the state of the context at will.
+
+
+
+
+
+## Observer
+
+Observer is a behavioral design pattern that lets you define a subscription mechanism to notify multiple objects about any events that happen to the object they’re observing.
+
+The object that has some interesting state is often called subject, but since it’s also going to notify other objects about the changes to its state, we’ll call it publisher. All other objects that want to track changes to the publisher’s state are called subscribers.
+
+The Observer pattern suggests that you add a subscription mechanism to the publisher class so individual objects can subscribe to or unsubscribe from a stream of events coming from that publisher. Fear not! Everything isn’t as complicated as it sounds. In reality, this mechanism consists of 1) an array field for storing a list of references to subscriber objects and 2) several public methods which allow adding subscribers to and removing them from that list.
+
+### When to use
+
+-  Use the pattern when some objects in your app must observe others, but only for a limited time or in specific cases.
+    - The subscription list is dynamic, so subscribers can join or leave the list whenever they need to.
+- Use the Observer pattern when changes to the state of one object may require changing other objects, and the actual set of objects is unknown beforehand or changes dynamically.
+    - You can often experience this problem when working with classes of the graphical user interface. For example, you created custom button classes, and you want to let the clients hook some custom code to your buttons so that it fires whenever a user presses a button.
+    - The Observer pattern lets any object that implements the subscriber interface subscribe for event notifications in publisher objects. You can add the subscription mechanism to your buttons, letting the clients hook up their custom code via custom subscriber classes.
+
+Examples:
+
+- Stock market updates: In a trading application, multiple traders may be interested in receiving updates about the prices of different stocks. The Subject in this case would be the stock market, and the Observers would be the traders. When the price of a stock changes, the stock market would notify all the traders who are observing it.
+- Temperature monitoring system: In a temperature monitoring system, there may be multiple devices that need to know when the temperature changes. The Subject in this case would be the temperature sensor, and the Observers would be the devices that need to know about the temperature changes. When the temperature changes, the sensor would notify all the devices that are observing it.
+- Event-driven systems: In an event-driven system, there may be multiple components that need to react to different events. The Subject in this case would be the event dispatcher, and the Observers would be the components that need to react to the events. When an event occurs, the dispatcher would notify all the components that are observing it.
+- Chat application: In a chat application, multiple users may be interested in receiving updates about new messages. The Subject in this case would be the chat room, and the Observers would be the users. When a new message is sent, the chat room would notify all the users who are observing it.
+
+### [Sample Implementation](./observer.py)
+
+![chain](./static/observer.png)
+
+### Key Components
+
+
+### Pros and Cons
+
+| Pros | Cons |
+| ---- | ---- |
+|  Open/Closed Principle. You can introduce new subscriber classes without having to change the publisher’s code (and vice versa if there’s a publisher interface). | Subscribers are notified in random order. |
+| You can establish relations between objects at runtime. | |
+
+### Relationships to other patterns
+
+- Chain of Responsibility, Command, Mediator and Observer address various ways of connecting senders and receivers of requests:
+    - Chain of Responsibility passes a request sequentially along a dynamic chain of potential receivers until one of them handles it.
+    - Command establishes unidirectional connections between senders and receivers.
+    - Mediator eliminates direct connections between senders and receivers, forcing them to communicate indirectly via a mediator object.
+    - Observer lets receivers dynamically subscribe to and unsubscribe from receiving requests.

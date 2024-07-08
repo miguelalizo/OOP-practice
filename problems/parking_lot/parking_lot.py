@@ -71,51 +71,65 @@ class Spot:
         self.reserved_by = None
 
 
-class IVehicle(ABC):
+class Vehicle(ABC):
     """
     Vehicle Abstract Class
     """
 
-    def __init__(self, spot_size: SpotSize, owner: str, plate: str):
+    def __init__(self, spot_size: SpotSize, owner: str, plate: str, spots_needed: int):
         self.spot_size = spot_size
         self.owner = owner
         self.plate = plate
+        self.spots_needed = spots_needed
+        self.spots: List[Spot] = []
 
     @abstractmethod
     def can_fit_in_spot(self, spot: Spot):
         pass
 
+    def clear_spots(self) -> None:
+        for spot in self.spots:
+            spot.clear_spot()
 
-class Motorcycle(IVehicle):
+    def take_spot(self, spot: Spot) -> None:
+        self.spots.append(spot)
+        spot.take_spot()
+
+
+class Motorcycle(Vehicle):
     def __init__(self, owner: str, plate: str):
-        super().__init__(SpotSize.Motorcycle, owner, plate)
+        super().__init__(SpotSize.Motorcycle, owner, plate, 1)
 
     def can_fit_in_spot(self, spot: Spot):
-        return True
+        return spot.is_available()
 
 
-class Compact(IVehicle):
-    def __init__(self, vehicle_type: SpotSize, owner: str, plate: str):
-        super().__init__(SpotSize.Compact, owner, plate)
-
-    def can_fit_in_spot(self, spot: Spot):
-        return spot.spot_size == SpotSize.Compact or spot.spot_size == SpotSize.Large
-
-
-class LargeCar(IVehicle):
+class Compact(Vehicle):
     def __init__(self, owner: str, plate: str):
-        super().__init__(SpotSize.Large, owner, plate)
+        super().__init__(SpotSize.Compact, owner, plate, 1)
 
     def can_fit_in_spot(self, spot: Spot):
-        return spot.spot_size == SpotSize.Large
+        return (
+            spot.spot_size == SpotSize.Compact
+            or spot.spot_size == SpotSize.Large
+            and spot.is_available()
+        )
 
 
-class Bus(IVehicle):
+class LargeCar(Vehicle):
     def __init__(self, owner: str, plate: str):
-        super().__init__(SpotSize.Bus, owner, plate)
+        super().__init__(SpotSize.Large, owner, plate, 1)
 
     def can_fit_in_spot(self, spot: Spot):
-        return spot.spot_size == SpotSize.Large
+        return spot.spot_size == SpotSize.Large and spot.is_available()
+
+
+class Bus(Vehicle):
+    def __init__(self, owner: str, plate: str):
+        super().__init__(SpotSize.Bus, owner, plate, 5)
+
+    def can_fit_in_spot(self, spot: Spot):
+        return spot.spot_size == SpotSize.Large and spot.is_available()
 
 
 class FloorBuilder:
@@ -165,18 +179,16 @@ class Floor:
                 res += 1
         return res
 
-    def park_vehicle(self, vehicle: IVehicle) -> bool:
+    def park_vehicle(self, vehicle: Vehicle) -> bool:
         count = 0
         spots = []
         for spot in self.spots:
-            if vehicle.can_fit_in_spot(spot) and spot.is_available():
+            if vehicle.can_fit_in_spot(spot):
                 count += 1
                 spots.append(spot)
-                if vehicle.spot_size != SpotSize.Bus or (
-                    vehicle.spot_size == SpotSize.Bus and count == 5
-                ):
+                if count == vehicle.spots_needed:
                     for s in spots:
-                        s.take_spot()
+                        vehicle.take_spot(s)
                     return True
             else:
                 count = 0
@@ -185,19 +197,22 @@ class Floor:
 
 
 class ParkingLot:
-    def __init__(self):
-        self.floors: List[Floor] = []
+    def __init__(self, floors: List[Floor] = None):
+        self.floors: List[Floor] = floors
 
     def add_floor(self, floor: Floor) -> None:
         self.floors.append(floor)
 
-    def park_vehicle(self, vehicle: IVehicle):
+    def park_vehicle(self, vehicle: Vehicle):
         for floor in self.floors:
             if floor.park_vehicle(vehicle) is True:
                 print(f"vehicle: {vehicle.spot_size}-{vehicle.plate} parked")
                 return True
         print(f"No spots available for vehicle: {vehicle.spot_size}-{vehicle.plate}")
         return False
+
+    def vacate_spot(self, vehicle: Vehicle):
+        vehicle.clear_spots()
 
 
 def main():
@@ -219,15 +234,21 @@ def main():
         .finalize()
     )
 
-    lot = ParkingLot()
-    lot.add_floor(floor1)
-    lot.add_floor(floor2)
+    lot = ParkingLot([floor1, floor2])
 
     car1 = LargeCar("owner1", "AB123")
     bus1 = Bus("busowner", "busplate")
 
     lot.park_vehicle(car1)
     lot.park_vehicle(bus1)
+
+    for spot in bus1.spots:
+        print(spot.status)
+
+    lot.vacate_spot(bus1)
+
+    for spot in bus1.spots:
+        print(spot.status)
 
 
 if __name__ == "__main__":

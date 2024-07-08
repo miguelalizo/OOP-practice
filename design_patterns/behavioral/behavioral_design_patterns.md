@@ -5,6 +5,14 @@
 1. [Chain of Responsibility](#chain-of-responsibility)
 1. [Command](#command)
 1. [Strategy](#strategy)
+1. [Observer](#observer)
+1. [*Mediator](#mediator)
+1. [*Iterator](#iterator)
+1. [*State](#state)
+1. [*Memento](#memento)
+1. [*Visitor](#visitor)
+1. [*Template](#template)
+
 
 ## Chain of Responsibility
 

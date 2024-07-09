@@ -71,8 +71,6 @@ This repository contains notes and examples of various design patterns as well a
 
 ## Problems
 
-- [Initialization File](problems/__init__.py)
-
 ### Call Center
 
 - [Call Center](problems/call_center/call_center.py)

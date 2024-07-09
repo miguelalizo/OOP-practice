@@ -80,7 +80,6 @@ This repository contains notes and examples of various design patterns as well a
 
 ### Deck of Cards
 
-- [Deck of Cards Initialization](problems/deck_of_cards/__init__.py)
 - [Card](problems/deck_of_cards/card.py)
 - [Deck](problems/deck_of_cards/deck.py)
 - [Game](problems/deck_of_cards/game.py)
@@ -96,11 +95,9 @@ This repository contains notes and examples of various design patterns as well a
 
 ### Online Chat
 
-- [Online Chat Initialization](problems/online_chat/__init__.py)
 - [Online Chat](problems/online_chat/online_chat.py)
 
 ### Parking Lot
 
-- [Parking Lot Initialization](problems/parking_lot/__init__.py)
 - [Parking Lot](problems/parking_lot/parking_lot.py)
 

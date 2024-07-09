@@ -26,7 +26,7 @@ This repository contains notes and examples of various design patterns as well a
     - [Flyweight](#flyweight)
     - [Proxy](#proxy)
 - [SOLID Principles](#solid-principles)
-- [OOP Problems](#problems)
+- [Common OOP Interview Problems](#problems)
   - [Call Center](#call-center)
   - [Deck of Cards](#deck-of-cards)
   - [Dictionary](#dictionary)

@@ -69,7 +69,7 @@ This repository contains notes and examples of various design patterns as well a
 
 - [SOLID Principles](solid_principles.md)
 
-## Problems
+## Common OOP Interview Problems
 
 ### Call Center
 

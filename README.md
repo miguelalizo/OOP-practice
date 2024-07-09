@@ -1,4 +1,4 @@
-# Object Priented Programming Patterns and Problems
+# Object Oriented Programming Patterns and Problems
 
 This repository contains notes and examples of various design patterns as well as common OOP interview problems implemented in Python.
 

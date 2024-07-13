@@ -23,7 +23,7 @@ This repository contains notes and examples of various design patterns as well a
   - [Facade](design_patterns/structural/structural_design_patterns.md#facade)
   - [Flyweight](design_patterns/structural/structural_design_patterns.md#flyweight)
   - [Proxy](design_patterns/structural/structural_design_patterns.md#proxy)
-- [SOLID Principles](#solid-principles)
+- [SOLID Principles](solid_principles.md)
 - [Common OOP Interview Problems](#common-oop-interview-problems)
   - [Call Center](#call-center)
   - [Deck of Cards](#deck-of-cards)
@@ -32,40 +32,6 @@ This repository contains notes and examples of various design patterns as well a
   - [Online Chat](#online-chat)
   - [Parking Lot](#parking-lot)
 
-## Design Patterns
-
-### Behavioral
-
-- [Behavioral Design Patterns](design_patterns/behavioral/behavioral_design_patterns.md)
-    - [Chain of Responsibility](design_patterns/behavioral/chain_of_responsibility.py)
-    - [Command](design_patterns/behavioral/command.py)
-    - [Observer](design_patterns/behavioral/observer.py)
-    - [Strategy](design_patterns/behavioral/strategy.py)
-
-### Creational
-
-- [Creational Design Patterns](design_patterns/creational/creational_design_patterns.md)
-    - [Abstract Factory](design_patterns/creational/abstract_factory.py)
-    - [Builder](design_patterns/creational/builder.py)
-    - [Factory Method](design_patterns/creational/factory_method.py)
-    - [Prototype](design_patterns/creational/prototype.py)
-    - [Singleton](design_patterns/creational/singleton.py)
-
-### Structural
-
-- [Structural Design Patterns](design_patterns/structural/structural_design_patterns.md)
-    - [Adapter](design_patterns/structural/adapter.py)
-    - [Bridge](design_patterns/structural/bridge.py)
-    - [Composite](design_patterns/structural/composite.py)
-    - [Decorator (Functional)](design_patterns/structural/decorator_func.py)
-    - [Decorator (OOP)](design_patterns/structural/decorator_oop.py)
-    - [Facade](design_patterns/structural/facade.py)
-    - [Flyweight](design_patterns/structural/flyweight.py)
-    - [Proxy](design_patterns/structural/proxy.py)
-
-## SOLID Principles
-
-- [SOLID Principles](solid_principles.md)
 
 ## Common OOP Interview Problems
 

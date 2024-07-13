@@ -1,5 +1,7 @@
 # Structural Design Patterns
 
+[Back to Main](../../README.md)
+
 ## Table of Contents
 
 1. [Adapter](#adapter)
@@ -11,6 +13,8 @@
 1. [Proxy](#proxy)
 
 ## Adapter
+
+[Back to top](#structural-design-patterns)
 
 
 The Adapter pattern is a structural design pattern that facilitates the interaction between two interfaces that are incompatible or cannot work together directly. It acts as a bridge, allowing objects with different interfaces to collaborate.
@@ -83,6 +87,8 @@ Identification: Adapter is recognizable by a constructor which takes an instance
 
 ## Bridge
 
+[Back to top](#structural-design-patterns)
+
 The Bridge Design Pattern is a structural design pattern that decouples an abstraction from its implementation so that both can vary independently. It does so by creating two separate hierarchies: one for abstractions and another for implementations. These hierarchies are then linked through composition, allowing for flexible combinations.
 
 Meaning: The abstraction holds an instance of the implementation interface and uses it in the same way regardless of what concrete implementation is being used.
@@ -128,6 +134,8 @@ Identification: Bridge can be recognized by a clear distinction between some con
 
 ## Composite
 
+[Back to top](#structural-design-patterns)
+
 The Composite Design Pattern is a structural approach that organizes objects into tree-like structures, uniformly treating individual objects and compositions.
 
 ### When to use
@@ -160,6 +168,8 @@ The Composite Pattern suits tasks needing a tree-like structure where elements a
 
 ## Decorator
 
+[Back to top](#structural-design-patterns)
+
 Decorator is a structural design pattern that lets you attach new behaviors to objects by placing these objects inside special wrapper objects that contain the behaviors.
 
 ### When to use
@@ -187,6 +197,8 @@ Decorator is a structural design pattern that lets you attach new behaviors to o
 | Single responsibility principle! You can divide a monolothic class that implements many different variants of behavior into several smaller classes | The initial configuration code of layer might look pretty ugly |
 
 ## Facade
+
+[Back to top](#structural-design-patterns)
 
 Facade is a structural design pattern that provides a simplified interface to a library, a framework, or any other complex set of classes.
 
@@ -236,6 +248,8 @@ The Flyweight pattern suggests separating extrinsic state from objects, preservi
 
 ## Flyweight
 
+[Back to top](#structural-design-patterns)
+
 - commonly used to manage objects that share similar or identical states.
 - The key idea behind the Flyweight pattern is to separate the intrinsic state (shared among multiple objects) from the extrinsic state (unique to each object).
     - Intrinsic State: This refers to constant data stored within an object, residing solely within the object itself and immutable by external entities. It remains consistent across different contexts and is shared among multiple objects.
@@ -269,6 +283,8 @@ The Flyweight pattern suggests separating extrinsic state from objects, preservi
 
 
 ## Proxy
+
+[Back to top](#structural-design-patterns)
 
 Proxy is like facade and decorator had a baby together.
 

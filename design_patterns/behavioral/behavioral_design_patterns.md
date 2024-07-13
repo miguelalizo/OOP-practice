@@ -1,5 +1,7 @@
 # Behavioral Design Patterns
 
+[Back to Main](../../README.md)
+
 ## Table of Contents
 
 1. [Chain of Responsibility](#chain-of-responsibility)
@@ -15,6 +17,8 @@
 
 
 ## Chain of Responsibility
+
+[Back to Top](#behavioral-design-patterns)
 
 Chain of Responsibility is a behavioral design pattern that lets you pass requests along a chain of handlers. Upon receiving a request, each handler decides either to process the request or to pass it to the next handler in the chain.
 
@@ -79,6 +83,8 @@ Identification: The pattern is recognizable by behavioral methods of one group o
 
 ## Command
 
+[Back to Top](#behavioral-design-patterns)
+
 The Command design pattern is a behavioral pattern that encapsulates a request as an object, thereby allowing for parameterization of clients with different requests, queuing of requests, and logging of requests.
 
 It separates the sender of a request from the receiver, providing a means for decoupling invokers and receivers.
@@ -136,6 +142,8 @@ By structuring your code this way, you achieve a high degree of decoupling. The 
 
 ## Strategy
 
+[Back to Top](#behavioral-design-patterns)
+
 Strategy is a behavioral design pattern that lets you define a family of algorithms, put each of them into a separate class, and make their objects interchangeable.
 
 The Strategy pattern suggests that you take a class that does something specific in a lot of different ways and extract all of these algorithms into separate classes called strategies.
@@ -189,6 +197,8 @@ This way the context becomes independent of concrete strategies, so you can add 
 
 
 ## Observer
+
+[Back to Top](#behavioral-design-patterns)
 
 Observer is a behavioral design pattern that lets you define a subscription mechanism to notify multiple objects about any events that happen to the object they’re observing.
 
